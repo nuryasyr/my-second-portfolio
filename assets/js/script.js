@@ -1,6 +1,23 @@
 'use strict';
 
 
+// EmailJS ile e-posta gönderme fonksiyonu
+const sendEmail = (e) => {
+  e.preventDefault();
+
+  emailjs
+    .sendForm('service_88ifxva', 'template_1vna7ri', form.current, {
+      publicKey: 'hqEZqH87Y_JpKnPYE',
+    })
+    .then((result) => {
+        console.log('Email sent successfully:', result.text);
+    })
+    .catch((error) => {
+        console.error('Error sending email:', error);
+    });
+
+  e.target.reset();
+};
 
 // element toggle function
 const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
@@ -122,16 +139,14 @@ const formBtn = document.querySelector("[data-form-btn]");
 
 // add event to all form input field
 for (let i = 0; i < formInputs.length; i++) {
-  formInputs[i].addEventListener("input", function () {
-
-    // check form validation
-    if (form.checkValidity()) {
-      formBtn.removeAttribute("disabled");
-    } else {
-      formBtn.setAttribute("disabled", "");
-    }
-
-  });
+    formInputs[i].addEventListener("input", function () {
+        // check form validation
+        if (form.checkValidity()) {
+            formBtn.removeAttribute("disabled");
+        } else {
+            formBtn.setAttribute("disabled", "");
+        }
+    });
 }
 
 
